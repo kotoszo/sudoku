@@ -94,9 +94,7 @@ def playerHasWon(matrix):
 def moveIsValid(m, m_y, m_x, number):
 
     r = m[m_y][:]
-    c = []
-    for x in m:
-        c.append(x[m_x])
+    c = [x[m_x] for x in m]
 
     c = [x for x in c if x != ' ']
     r = [x for x in m[m_y] if x != ' ']
