@@ -20,47 +20,31 @@ class bcolors:
 #                               FUNCTIONS                              #
 
 
-def columnIsClean(col):
-    # Beadsz neki egy oszlopot listaként ~>
-    # az oszlopban van-e ismétlés, és 1-9ig benne van-e minden szám
+def is_clean(col):
+    # col: a column of the board as a list
+    # returns whether it contains every number from 1-9 without duplicates.
 
     clean = True
 
     if len(col) != len(set(col)):
         clean = False
 
-    for i in range(1, 10):
+    for i in range(1, 10):  # TO-DO: comprehension mb? or at least while for better optimization !!!
         if i not in col:
             clean = False
 
     return clean
 
 
-def rowIsClean(r):
-    # Ugyanaz mint a fentebbi, csak sort vizsgál oszlop helyett
-    clean = True
-
-    if len(r) != len(set(r)):
-        clean = False
-
-    for i in range(1, 10):
-        if i not in r:
-            clean = False
-
-    return clean
-
-
 def subMatrixesAreClean(matrix):
-    # Ugyanaz mint a fentebbi csak kis 3x3as szutykokra
+    # Checks whether every submatrix is clean on the board
     clean = True
 
     for y in range(0, 7, 3):
         for x in range(0, 7, 3):
 
-            subMatrix = []
-            for j in range(3):
-                for i in range(3):
-                    subMatrix.append(matrix[y + j][x + i])
+            subMatrix = [matrix[y + j][x + i] for i in range(3) for j in range(3)]
+            print(subMatrix)
 
             if len(subMatrix) != len(set(subMatrix)):
                 clean = False
@@ -77,12 +61,10 @@ def playerHasWon(matrix):
     won = True
 
     for i in range(9):
-        column = []
-        for x in matrix:
-            column.append(x[i])
+        column = [x[i] for x in matrix]
         row = matrix[i]
 
-        if not (rowIsClean(row) and columnIsClean(column)):
+        if not (is_clean(row) and is_clean(column)):
             won = False
 
     if not subMatrixesAreClean(matrix):
@@ -94,7 +76,7 @@ def playerHasWon(matrix):
 def moveIsValid(m, m_y, m_x, number):
 
     r = m[m_y][:]
-    c = [x[m_x] for x in m]
+    c = [x[m_x] for x in m]  # TO-DO: Merge these and the next two lines?
 
     c = [x for x in c if x != ' ']
     r = [x for x in m[m_y] if x != ' ']
@@ -266,8 +248,7 @@ def welcomeScreen():
 
     difficulty = input("Please choose a difficulty level from 1-10: ")
 
-    while difficulty not in ['1', '2,', '3', '4', '5',
-                             '6', '7', '8', '9', '10']:
+    while int(difficulty) not in range(1, 11):
         print("Invalid input!")
         difficulty = input("Please choose a difficulty (1-10): ")
 
