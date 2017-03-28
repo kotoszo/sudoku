@@ -1,15 +1,11 @@
 def is_clean(col):
-    # col: a column of the board as a list
+    # a list (of a column or a row of the board)
     # returns whether it contains every number from 1-9 without duplicates.
 
     clean = True
 
-    if len(col) != len(set(col)):
-        clean = False
-
-    for i in range(1, 10):  # TO-DO: comprehension mb? or at least while for better optimization !!!
-        if i not in col:
-            clean = False
+    clean = (len(col) != len(set(col)))
+    [clean = False if i not in col for i in range(1, 10)]
 
     return clean
 

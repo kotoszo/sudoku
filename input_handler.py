@@ -10,8 +10,8 @@ def getInput(matrix):
             if len(s) < 3:
                 raise ValueError
             else:
-                y = int(s[0])-1
-                x = int(s[1])-1
+                y = int(s[0]) - 1
+                x = int(s[1]) - 1
             if (x in range(0, 9) and y in range(0, 9)):
                 Number = int(s[2])
                 if Number > 0 and Number < 10:
