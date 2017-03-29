@@ -6,36 +6,35 @@
 ########################################################################
 #                         IMPORTED AND MISC.                           #
 
-from random import randint as rnd
-from random import shuffle
+from output_handler import *
+from stage_handler import *
+from status_handler import *
 from os import system
+from input_handler import *
 import time
-
-
-class bcolors:
-    UNDERLINE = '\033[4m'
-    ENDC = '\033[0m'
 
 ########################################################################
 #                                 MAIN                                 #
 
 
 wannaplay = True
+highlighted = [0, 0]
 
 while wannaplay:
 
     moves = []
     difficulty = welcomeScreen()
     z = [[False for _ in range(9)] for _ in range(9)]
-    print(z)
-    m = initBoard(makeStage())
+    m = initBoard(makeStage(), difficulty, z)
     system('clear')
 
     while not playerHasWon(m):
 
+        m[highlighted[0]][highlighted[1]] = bcolors['YELLOW'] + \
+            str(m[highlighted[0]][highlighted[1]]) + bcolors['ENDC']
         printGameState(m)
         print()
-        getInput(m)
+        getInput(m, z, moves)
 
     system('clear')
     printGameState(m)

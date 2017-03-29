@@ -1,3 +1,14 @@
+from os import system
+import time
+import curses
+
+bcolors = {
+    'UNDERLINE': '\033[4m',
+    'ENDC': '\033[0m',
+    'YELLOW': '\033[93m'
+}
+
+
 def printGameState(m):
     system('clear')
     j = 0
@@ -5,9 +16,9 @@ def printGameState(m):
         i = 0
         if j % 3 == 2 and j != 8:
             for x in a:
-                print(bcolors.UNDERLINE + str(x) + bcolors.ENDC, end=' ')
+                print(bcolors['UNDERLINE'] + str(x) + bcolors['ENDC'], end=' ')
                 if i % 3 == 2 and i != 8:
-                    print(bcolors.UNDERLINE + '|' + bcolors.ENDC, end=' ')
+                    print(bcolors['UNDERLINE'] + '|' + bcolors['ENDC'], end=' ')
                 i += 1
         else:
             for x in a:

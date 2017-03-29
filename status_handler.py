@@ -1,13 +1,7 @@
 def is_clean(col):
     # a list (of a column or a row of the board)
     # returns whether it contains every number from 1-9 without duplicates.
-
-    clean = True
-
-    clean = (len(col) != len(set(col)))
-    [clean = False if i not in col for i in range(1, 10)]
-
-    return clean
+    return True
 
 
 def subMatrixesAreClean(matrix):

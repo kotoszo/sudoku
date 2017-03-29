@@ -1,8 +1,11 @@
-def getInput(matrix):
+import time
+
+
+def getInput(matrix, z, moves):
     s = input("[row] [column] [number] OR 'back' to undo OR 'quit': ").split(' ')
     print()
     if s[0].lower() == 'back' and len(s) == 1:
-        takeBackLastMove()
+        takeBackLastMove(matrix, moves)
     elif s[0].lower() == 'quit' and len(s) == 1:
         exit()
     else:
@@ -16,9 +19,9 @@ def getInput(matrix):
                 Number = int(s[2])
                 if Number > 0 and Number < 10:
                     if z[y][x]:
-                        if moveIsValid(m, y, x, Number):
-                            moves.append([y, x, m[y][x]])
-                            m[y][x] = Number
+                        if moveIsValid(matrix, y, x, Number):
+                            moves.append([y, x, matrix[y][x]])
+                            matrix[y][x] = Number
                     else:
                         raise TypeError
                 else:
@@ -63,7 +66,7 @@ def moveIsValid(m, m_y, m_x, number):
         return False
 
 
-def takeBackLastMove():
+def takeBackLastMove(m, moves):
     if len(moves) > 0:
         move = moves[len(moves) - 1]
         m[move[0]][move[1]] = move[2]
