@@ -3,10 +3,11 @@ def makeStage():
     l = [x for x in range(1, 10)]
     shuffle(l)
 
-    # Generates empty 'places'
+    # The Sudoku table
     m = [[None for _ in range(9)] for _ in range(9)]
     y, x = 0, 0
     k = 0
+
     # The upperleft block
     for i in range(3):
         for i in range(3):
@@ -83,20 +84,20 @@ def makeStage():
     return m
 
 
-#
+# At random coordinates removes the number
 def initBoard(m):
     already_chosen = []
 
     for i in range(difficulty * 7):
         x = rnd(0, 8)
         y = rnd(0, 8)
-        toBeRemoved = [y, x]
+        to_be_removed = [y, x]
         while to_be_removed in already_chosen:
             x = rnd(0, 8)
             y = rnd(0, 8)
-            toBeRemoved = [y, x]
+            to_be_removed = [y, x]
 
-        alreadyChosen.append(toBeRemoved)
+        already_chosen.append(to_be_removed)
         m[y][x] = ' '
         z[y][x] = True
 
