@@ -18,49 +18,47 @@ def makeStage():
     # idaáig
     x = 0
     y = 0
-    for i in range(1):
-        for i in range(3):
-            m[0 + y][3 + x] = m[1 + y][0 + x]
-            x += 1
-        y += 0
-        x = 0
-        for i in range(3):
-            m[1 + y][3 + x] = m[2 + y][0 + x]
-            x += 1
-        y, x = 0, 0
-        for i in range(3):
-            m[2 + y][3 + x] = m[0 + y][0 + x]
-            x += 1
+    for i in range(3):
+        m[y][3 + x] = m[1 + y][x]
+        x += 1
+    y += 0
+    x = 0
+    for i in range(3):
+        m[1 + y][3 + x] = m[2 + y][x]
+        x += 1
+    y, x = 0, 0
+    for i in range(3):
+        m[2 + y][3 + x] = m[y][x]
+        x += 1
     x = 3
     y = 0
-    for i in range(1):
-        for i in range(3):
-            m[0 + y][3 + x] = m[1 + y][0 + x]
-            x += 1
-        y = 0
-        x = 3
-        for i in range(3):
-            m[1 + y][3 + x] = m[2 + y][0 + x]
-            x += 1
-        y, x = 0, 3
-        for i in range(3):
-            m[2 + y][3 + x] = m[0 + y][0 + x]
-            x += 1
+    for i in range(3):
+        m[y][3 + x] = m[1 + y][x]
+        x += 1
+    y = 0
+    x = 3
+    for i in range(3):
+        m[1 + y][3 + x] = m[2 + y][x]
+        x += 1
+    y, x = 0, 3
+    for i in range(3):
+        m[2 + y][3 + x] = m[y][x]
+        x += 1
 
     y = 0
     x = 0
     # középső oszlopok
     for i in range(3):
         for i in range(3):
-            m[3 + y][2 + x] = m[0 + y][0 + x]
+            m[3 + y][2 + x] = m[y][x]
             y += 1
         y -= 3
         for i in range(3):
-            m[3 + y][0 + x] = m[0 + y][1 + x]
+            m[3 + y][x] = m[y][1 + x]
             y += 1
         y -= 3
         for i in range(3):
-            m[3 + y][1 + x] = m[0 + y][2 + x]
+            m[3 + y][1 + x] = m[y][2 + x]
             y += 1
         y -= 3
         x += 3
@@ -69,15 +67,15 @@ def makeStage():
     # lsó oszlopok
     for i in range(3):
         for i in range(3):
-            m[3 + y][2 + x] = m[0 + y][0 + x]
+            m[3 + y][2 + x] = m[y][x]
             y += 1
         y -= 3
         for i in range(3):
-            m[3 + y][0 + x] = m[0 + y][1 + x]
+            m[3 + y][x] = m[y][1 + x]
             y += 1
         y -= 3
         for i in range(3):
-            m[3 + y][1 + x] = m[0 + y][2 + x]
+            m[3 + y][1 + x] = m[y][2 + x]
             y += 1
         y -= 3
         x += 3
