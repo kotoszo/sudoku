@@ -1,6 +1,5 @@
 from os import system
 import time
-import curses
 import getch
 
 bcolors = {
