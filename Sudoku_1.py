@@ -11,33 +11,41 @@ from status_handler import *
 from input_handler import *
 from os import system
 import getch
+import vlc
 
 #
 # MAIN                                 #
 
-wannaplay = True
-highlighted = [0, 0]
 
-while wannaplay:
+def main():
+    wannaplay = True
+    highlighted = [0, 0]
 
-    moves = []
-    difficulty = welcomeScreen()
-    z = [[False for _ in range(9)] for _ in range(9)]
-    m = initBoard(makeStage(), difficulty, z)
-    system('clear')
+    while wannaplay:
 
-    while not playerHasWon(m):
+        moves = []
+        difficulty = welcomeScreen()
+        z = [[False for _ in range(9)] for _ in range(9)]
+        m = initBoard(makeStage(), difficulty, z)
+        system('clear')
 
-        m[highlighted[0]][highlighted[1]] = bcolors['YELLOW'] + \
-            str(m[highlighted[0]][highlighted[1]]) + bcolors['ENDC']
+        while not playerHasWon(m):
+
+            m[highlighted[0]][highlighted[1]] = bcolors['YELLOW'] + \
+                str(m[highlighted[0]][highlighted[1]]) + bcolors['ENDC']
+            printGameState(m)
+            print()
+            highlighted = getInput(m, z, moves, highlighted)
+
+        system('clear')
         printGameState(m)
-        print()
-        highlighted = getInput(m, z, moves, highlighted)
+        print("\nCongratulations! You won!")
+        vlc.MediaPlayer("yeah.wav").play()
+        print("Wanna play again? 'y' for yes, anything else to quit.")
+        stillWantsToPlay = getch.getch()
+        if stillWantsToPlay.lower() != 'y':
+            wannaplay = False
 
-    system('clear')
-    printGameState(m)
-    print("\nCongratulations! You won!")
-    print("Wanna play again? 'y' for yes, anything else to quit.")
-    stillWantsToPlay = getch.getch()
-    if stillWantsToPlay.lower() != 'y':
-        wannaplay = False
+
+if __name__ == '__main__':
+    main()

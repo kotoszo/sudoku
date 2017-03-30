@@ -3,6 +3,7 @@ import getch
 import string
 from stage_handler import makeStage
 from os import system
+import vlc
 
 
 def getInput(matrix, z, moves, highlighted):
@@ -42,7 +43,8 @@ def getInput(matrix, z, moves, highlighted):
                 raise TypeError
         except TypeError:
             print("You can't rewrite that field!")
-            system('cvlc Vader_noo.wav vlc://quit')
+            vlc.MediaPlayer("Vader_noo.wav").play()
+            time.sleep(2)
         finally:
             return highlighted
 
@@ -54,6 +56,7 @@ def moveIsValid(matrix, m_y, m_x, number):
 
     if (number in col) or (number in row):
         print("Row or column already contains that number!")
+        vlc.MediaPlayer("Vader_noo.wav").play()
         time.sleep(2)
         return False
 
@@ -69,6 +72,7 @@ def moveIsValid(matrix, m_y, m_x, number):
 
     if str(number) in subMatrix:
         print("Submatrix already contains that number!")
+        vlc.MediaPlayer("Vader_noo.wav").play()
         time.sleep(2)
         return False
 
