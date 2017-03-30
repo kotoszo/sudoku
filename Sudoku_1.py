@@ -1,8 +1,7 @@
-# Sudoku by Tamás Richter and Ákos Nagy                 #
-# CODECOOL 2017                             #
-#
+# Sudoku by Tamás Richter and Ákos Nagy
+# CODECOOL 2017
 
-# IMPORTS                           #
+# IMPORTS
 from output_handler import *
 from stage_handler import *
 from status_handler import *
@@ -12,7 +11,7 @@ import getch
 import vlc
 
 
-# Start                               #
+# Start
 def main():
     wannaplay = True
     highlighted = [0, 0]
@@ -23,7 +22,7 @@ def main():
         difficulty = welcome_screen()
         # List for the numbers what we took out.
         z = [[False for _ in range(9)] for _ in range(9)]
-        m = init_board(makeStage(), difficulty, z)
+        m = init_board(make_stage(), difficulty, z)
         system('clear')
 
         while not player_has_won(m):

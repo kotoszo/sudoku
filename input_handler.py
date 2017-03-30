@@ -31,7 +31,7 @@ def get_input(matrix, z, moves, highlighted):
             highlighted[1] -= 1
 
         elif s.lower() == 'b':
-            takeBackLastMove(matrix, moves)
+            take_back_last_move(matrix, moves)
         elif s.lower() == 'q':
             exit()
         return highlighted
@@ -45,8 +45,8 @@ def get_input(matrix, z, moves, highlighted):
             if z[y][x]:
 
                 if move_is_valid(matrix, y, x, Number):
-                    matrix[y][x] = Number
                     moves.append([y, x, matrix[y][x]])
+                    matrix[y][x] = Number
 
             else:
                 raise TypeError
@@ -93,7 +93,11 @@ def move_is_valid(matrix, m_y, m_x, number):
 
 def take_back_last_move(matrix, moves):
     ''' If you want to delete your last move '''
+
     if len(moves) > 0:
-        move = moves[len(moves) - 1]
+        move = moves[-1]
         matrix[move[0]][move[1]] = move[2]
         moves.pop(len(moves) - 1)
+    else:
+        print("There are no moves to be taken back!")
+        time.sleep(2)
