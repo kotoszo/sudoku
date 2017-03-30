@@ -1,10 +1,11 @@
 from random import shuffle
 from random import randint as rnd
 from output_handler import bcolors
-import time
 
 
-def makeStage():
+def make_stage():
+    '''Creates a 9x9 matrix of random numbers'''
+
     l = [x for x in range(1, 10)]
     m = [[None for _ in range(9)] for _ in range(9)]
     shuffle(l)
@@ -85,8 +86,16 @@ def makeStage():
     return m
 
 
-# At random coordinates removes the number
-def initBoard(m, difficulty, z):
+def init_board(m, difficulty, z):
+    '''Initalizes a full 9x9 board by removing 7*difficulty numbers
+       from random places and replacing them with dots.
+
+       Args:
+       m: the 9x9 matrix,
+       difficulty: guess,
+       z: the matrix used to mark the initial numbers so that they can't be rewritten.
+    '''
+
     already_chosen = []
 
     for i in range(difficulty * 7):
