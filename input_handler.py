@@ -9,30 +9,23 @@ def getInput(matrix, z, moves, highlighted):
     print()
     matrix[highlighted[0]][highlighted[1]] = matrix[highlighted[0]][highlighted[1]][5]
     if str(s) not in string.digits:
-        if s == "w":
-            if highlighted[0] > 0:
+        if s == "w" and highlighted[0] > 0:
                 highlighted[0] -= 1
-                return highlighted
 
-        elif s == "d":
-            if highlighted[1] < 8:
+        elif s == "d" and highlighted[1] < 8:
                 highlighted[1] += 1
-                return highlighted
 
-        elif s == "s":
-            if highlighted[0] < 8:
+        elif s == "s" and highlighted[0] < 8:
                 highlighted[0] += 1
-                return highlighted
 
-        elif s == "a":
-            if highlighted[1] > 0:
+        elif s == "a" and highlighted[1] > 0:
                 highlighted[1] -= 1
-                return highlighted
 
         elif s.lower() == 'b':
             takeBackLastMove(matrix, moves)
         elif s.lower() == 'q':
             exit()
+        return highlighted
     else:
         try:
             Number = int(s)
