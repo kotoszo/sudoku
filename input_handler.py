@@ -56,9 +56,10 @@ def get_input(matrix, z, moves, highlighted):
             return highlighted
 
 
-# Checks wheter you can do it or not.
 def move_is_valid(matrix, m_y, m_x, number):
-    '''Fills the row list with the numbers from the rows. (wow)'''
+    '''Checks whether a move to be made is in accordance with the rules'''
+
+    # Row items into a list
     row = matrix[m_y][:]
     # Same, but with the columns.
     col = [matrow[m_x] for matrow in matrix]
