@@ -11,7 +11,9 @@ bcolors = {
 }
 
 
-def printGameState(m):
+def print_game_state(m):
+    '''Prints the board with grids and stuff.'''
+
     system('clear')
     j = 0
     for a in m:
@@ -32,7 +34,9 @@ def printGameState(m):
         print()
 
 
-def welcomeScreen():
+def welcome_screen():
+    '''Initial welcome message and difficulty input request.'''
+
     system('clear')
     print("Welcome to Sudoku!")
     time.sleep(1)
