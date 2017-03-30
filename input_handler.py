@@ -2,24 +2,24 @@ import time
 import getch
 import string
 from stage_handler import makeStage
+from os import system
 
 
 def getInput(matrix, z, moves, highlighted):
     s = getch.getch()
-    print()
     matrix[highlighted[0]][highlighted[1]] = matrix[highlighted[0]][highlighted[1]][5]
     if str(s) not in string.digits:
         if s == "w" and highlighted[0] > 0:
-                highlighted[0] -= 1
+            highlighted[0] -= 1
 
         elif s == "d" and highlighted[1] < 8:
-                highlighted[1] += 1
+            highlighted[1] += 1
 
         elif s == "s" and highlighted[0] < 8:
-                highlighted[0] += 1
+            highlighted[0] += 1
 
         elif s == "a" and highlighted[1] > 0:
-                highlighted[1] -= 1
+            highlighted[1] -= 1
 
         elif s.lower() == 'b':
             takeBackLastMove(matrix, moves)
@@ -28,7 +28,7 @@ def getInput(matrix, z, moves, highlighted):
         return highlighted
     else:
         try:
-            Number = int(s)
+            Number = s
             m = [["." for _ in range(9)] for _ in range(9)]
             y = highlighted[0]
             x = highlighted[1]
@@ -42,39 +42,37 @@ def getInput(matrix, z, moves, highlighted):
                 raise TypeError
         except TypeError:
             print("You can't rewrite that field!")
-            time.sleep(2)
+            system('cvlc Vader_noo.wav vlc://quit')
         finally:
             return highlighted
 
 
-def moveIsValid(m, m_y, m_x, number):
+def moveIsValid(matrix, m_y, m_x, number):
 
-    r = m[m_y][:]
-    c = [x[m_x] for x in m]  # TO-DO: Merge these and the next two lines?
+    row = matrix[m_y][:]
+    col = [matrow[m_x] for matrow in matrix]
 
-    c = [x for x in c if x != ' ']
-    r = [x for x in m[m_y] if x != ' ']
-
-    if not (number in c or number in r):
-
-        m_y -= m_y % 3
-        m_x -= m_x % 3
-
-        subMatrix = []
-        for j in range(3):
-            for i in range(3):
-                subMatrix.append(m[m_y + j][m_x + i])
-
-        if number in subMatrix:
-            print('Invalid move!')
-            time.sleep(2)
-            return False
-        else:
-            return True
-    else:
-        print('Invalid move!')
+    if (number in col) or (number in row):
+        print("Row or column already contains that number!")
         time.sleep(2)
         return False
+
+    m_y -= m_y % 3
+    m_x -= m_x % 3
+
+    subMatrix = []
+    for i in range(3):
+        for j in range(3):
+            subMatrix.append(matrix[m_y + i][m_x + j])
+
+    subMatrix = [matrix[m_y + i][m_x + j] for j in range(3) for i in range(3)]
+
+    if str(number) in subMatrix:
+        print("Submatrix already contains that number!")
+        time.sleep(2)
+        return False
+
+    return True
 
 
 def takeBackLastMove(m, moves):

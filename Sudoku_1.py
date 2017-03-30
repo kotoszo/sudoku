@@ -12,6 +12,7 @@ from status_handler import *
 from os import system
 from input_handler import *
 import time
+import getch
 
 #
 # MAIN                                 #
@@ -40,7 +41,7 @@ while wannaplay:
     system('clear')
     printGameState(m)
     print("\nCongratulations! You won!")
-    stillWantsToPlay = input("Wanna play again? 'y' for yes, " +
-                             "anything else to quit: ")
+    print("Wanna play again? 'y' for yes, anything else to quit.")
+    stillWantsToPlay = getch.getch()
     if stillWantsToPlay.lower() != 'y':
         wannaplay = False

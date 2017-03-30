@@ -1,8 +1,3 @@
-def is_clean(col):
-    # a list (of a column or a row of the board)
-    # returns whether it contains every number from 1-9 without duplicates.
-    return True
-
 
 def subMatrixesAreClean(matrix):
     # Checks whether every submatrix is clean on the board
@@ -12,7 +7,6 @@ def subMatrixesAreClean(matrix):
         for x in range(0, 7, 3):
 
             subMatrix = [matrix[y + j][x + i] for i in range(3) for j in range(3)]
-            print(subMatrix)
 
             if len(subMatrix) != len(set(subMatrix)):
                 clean = False
@@ -28,14 +22,9 @@ def playerHasWon(matrix):
 
     won = True
 
-    for i in range(9):
-        column = [x[i] for x in matrix]
-        row = matrix[i]
-
-        if not (is_clean(row) and is_clean(column)):
-            won = False
-
-    if not subMatrixesAreClean(matrix):
-        won = False
+    for row in matrix:
+        for item in row:
+            if item == '.':
+                return False
 
     return won

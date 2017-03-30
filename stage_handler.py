@@ -1,12 +1,14 @@
 from random import shuffle
 from random import randint as rnd
 from output_handler import bcolors
+import time
 
 
 def makeStage():
     l = [x for x in range(1, 10)]
     m = [[None for _ in range(9)] for _ in range(9)]
     shuffle(l)
+    l = [str(i) for i in l]
     y, x = 0, 0
     k = 0
     for i in range(3):
