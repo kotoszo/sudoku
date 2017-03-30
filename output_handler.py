@@ -2,6 +2,10 @@ from os import system
 import time
 import getch
 
+
+'''Module to handle input related tasks for the Sudoku game'''
+
+# Color character codes for later use.
 bcolors = {
     'UNDERLINE': '\033[4m',
     'ENDC': '\033[0m',

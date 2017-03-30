@@ -5,6 +5,9 @@ from os import system
 import vlc
 
 
+'''Module to handle input related tasks for the Sudoku game'''
+
+
 def get_input(matrix, z, moves, highlighted):
     '''Input section. It requires a matrix, a list where are the numbers are missing,
         the 'history' of the game and the coordinates of the of the player'''
