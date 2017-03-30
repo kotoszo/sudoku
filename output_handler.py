@@ -1,11 +1,13 @@
 from os import system
 import time
 import curses
+import getch
 
 bcolors = {
     'UNDERLINE': '\033[4m',
     'ENDC': '\033[0m',
-    'YELLOW': '\033[93m'
+    'YELLOW': '\033[93m',
+    "BLACK": '\033[30m'
 }
 
 
@@ -34,8 +36,8 @@ def welcomeScreen():
     system('clear')
     print("Welcome to Sudoku!")
     time.sleep(1)
-
-    difficulty = input("Please choose a difficulty level from 1-10: ")
+    print("Please choose a difficulty level from 1-10: ")
+    difficulty = getch.getch()
 
     while int(difficulty) not in range(1, 11):
         print("Invalid input!")

@@ -1,39 +1,57 @@
 import time
+import getch
+import string
+from stage_handler import makeStage
 
 
-def getInput(matrix, z, moves):
-    s = input("[row] [column] [number] OR 'back' to undo OR 'quit': ").split(' ')
+def getInput(matrix, z, moves, highlighted):
+    s = getch.getch()
     print()
-    if s[0].lower() == 'back' and len(s) == 1:
-        takeBackLastMove(matrix, moves)
-    elif s[0].lower() == 'quit' and len(s) == 1:
-        exit()
+    matrix[highlighted[0]][highlighted[1]] = matrix[highlighted[0]][highlighted[1]][5]
+    if str(s) not in string.digits:
+        if s == "w":
+            if highlighted[0] > 0:
+                highlighted[0] -= 1
+                return highlighted
+
+        elif s == "d":
+            if highlighted[1] < 8:
+                highlighted[1] += 1
+                return highlighted
+
+        elif s == "s":
+            if highlighted[0] < 8:
+                highlighted[0] += 1
+                return highlighted
+
+        elif s == "a":
+            if highlighted[1] > 0:
+                highlighted[1] -= 1
+                return highlighted
+
+        elif s.lower() == 'b':
+            takeBackLastMove(matrix, moves)
+        elif s.lower() == 'q':
+            exit()
     else:
         try:
-            if len(s) < 3:
-                raise ValueError
+            Number = int(s)
+            m = [["." for _ in range(9)] for _ in range(9)]
+            y = highlighted[0]
+            x = highlighted[1]
+            if z[y][x]:
+
+                if moveIsValid(matrix, y, x, Number):
+                    matrix[y][x] = Number
+                    moves.append([y, x, m[y][x]])
+
             else:
-                y = int(s[0]) - 1
-                x = int(s[1]) - 1
-            if (x in range(0, 9) and y in range(0, 9)):
-                Number = int(s[2])
-                if Number > 0 and Number < 10:
-                    if z[y][x]:
-                        if moveIsValid(matrix, y, x, Number):
-                            moves.append([y, x, matrix[y][x]])
-                            matrix[y][x] = Number
-                    else:
-                        raise TypeError
-                else:
-                    raise ValueError
-            else:
-                raise ValueError
-        except ValueError:
-            print("Invalid input!")
-            time.sleep(2)
+                raise TypeError
         except TypeError:
             print("You can't rewrite that field!")
             time.sleep(2)
+        finally:
+            return highlighted
 
 
 def moveIsValid(m, m_y, m_x, number):
@@ -71,6 +89,3 @@ def takeBackLastMove(m, moves):
         move = moves[len(moves) - 1]
         m[move[0]][move[1]] = move[2]
         moves.pop(len(moves) - 1)
-    else:
-        print("There are no moves to be taken back!")
-        time.sleep(2)

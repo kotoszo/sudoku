@@ -1,5 +1,6 @@
 from random import shuffle
 from random import randint as rnd
+from output_handler import bcolors
 
 
 def makeStage():
@@ -96,7 +97,7 @@ def initBoard(m, difficulty, z):
             to_be_removed = [y, x]
 
         already_chosen.append(to_be_removed)
-        m[y][x] = ' '
+        m[y][x] = "."
         z[y][x] = True
 
     return m

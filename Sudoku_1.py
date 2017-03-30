@@ -1,10 +1,10 @@
-#                Sudoku by Tamás Richter and Ákos Nagy                 #
-#                            CODECOOL 2017                             #
-########################################################################
+# Sudoku by Tamás Richter and Ákos Nagy                 #
+# CODECOOL 2017                             #
+#
 
 
-########################################################################
-#                         IMPORTED AND MISC.                           #
+#
+# IMPORTED AND MISC.                           #
 
 from output_handler import *
 from stage_handler import *
@@ -13,12 +13,13 @@ from os import system
 from input_handler import *
 import time
 
-########################################################################
-#                                 MAIN                                 #
-
+#
+# MAIN                                 #
 
 wannaplay = True
 highlighted = [0, 0]
+y = highlighted[0]
+x = highlighted[1]
 
 while wannaplay:
 
@@ -34,7 +35,7 @@ while wannaplay:
             str(m[highlighted[0]][highlighted[1]]) + bcolors['ENDC']
         printGameState(m)
         print()
-        getInput(m, z, moves)
+        highlighted = getInput(m, z, moves, highlighted)
 
     system('clear')
     printGameState(m)
