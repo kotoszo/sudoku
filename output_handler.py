@@ -36,11 +36,12 @@ def welcomeScreen():
     system('clear')
     print("Welcome to Sudoku!")
     time.sleep(1)
-    print("Please choose a difficulty level from 1-10: ")
-    difficulty = getch.getch()
 
-    while int(difficulty) not in range(1, 11):
-        print("Invalid input!")
-        difficulty = input("Please choose a difficulty (1-10): ")
-
-    return int(difficulty)
+    difficulty = 0
+    while difficulty not in range(1, 10):
+        try:
+            print("Please choose a difficulty level from 1-9")
+            difficulty = int(getch.getch())
+        except:
+            print("Invalid input.")
+    return difficulty

@@ -4,14 +4,12 @@
 
 
 #
-# IMPORTED AND MISC.                           #
-
+# IMPORTS                           #
 from output_handler import *
 from stage_handler import *
 from status_handler import *
-from os import system
 from input_handler import *
-import time
+from os import system
 import getch
 
 #
@@ -19,8 +17,6 @@ import getch
 
 wannaplay = True
 highlighted = [0, 0]
-y = highlighted[0]
-x = highlighted[1]
 
 while wannaplay:
 
