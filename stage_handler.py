@@ -6,12 +6,13 @@ from output_handler import bcolors
 def make_stage():
     '''Creates a 9x9 matrix of random numbers'''
 
+    # List, what contains numbers between 1 and 9. (later shuffled)
     l = [x for x in range(1, 10)]
     m = [[None for _ in range(9)] for _ in range(9)]
     shuffle(l)
     l = [str(i) for i in l]
-    y, x = 0, 0
-    k = 0
+    # The upperleft block
+    y, x, k = 0, 0, 0
     for i in range(3):
         for i in range(3):
             m[y][x] = l[k]
@@ -19,13 +20,11 @@ def make_stage():
             k += 1
         x = 0
         y += 1
-    # idaáig
-    x = 0
-    y = 0
+    # The uppermiddle block. It copies from the upperlfet block.(Horizontally)
+    y, x = 0, 0
     for i in range(3):
         m[y][3 + x] = m[1 + y][x]
         x += 1
-    y += 0
     x = 0
     for i in range(3):
         m[1 + y][3 + x] = m[2 + y][x]
@@ -34,13 +33,12 @@ def make_stage():
     for i in range(3):
         m[2 + y][3 + x] = m[y][x]
         x += 1
-    x = 3
-    y = 0
+    # The upperright block. It copies from the uppermidle block.(Horizontally)
+    x, y = 3, 0
     for i in range(3):
         m[y][3 + x] = m[1 + y][x]
         x += 1
-    y = 0
-    x = 3
+    y, x = 0, 3
     for i in range(3):
         m[1 + y][3 + x] = m[2 + y][x]
         x += 1
@@ -48,10 +46,8 @@ def make_stage():
     for i in range(3):
         m[2 + y][3 + x] = m[y][x]
         x += 1
-
-    y = 0
-    x = 0
-    # középső oszlopok
+    # The middle section copies from the previous
+    y, x = 0, 0
     for i in range(3):
         for i in range(3):
             m[3 + y][2 + x] = m[y][x]
@@ -66,9 +62,8 @@ def make_stage():
             y += 1
         y -= 3
         x += 3
-    x = 0
-    y = 3
-    # lsó oszlopok
+    y, x = 3, 0
+    # Lower section, copies from the previous
     for i in range(3):
         for i in range(3):
             m[3 + y][2 + x] = m[y][x]
